@@ -47,3 +47,13 @@ def format(pk: str):
 @app.post("/products")
 def create(product: Product):
     return product.save()
+
+
+@app.get("/products/{pk}")
+def get(pk: str):
+    return Product.get(pk)
+
+
+@app.delete("/products/{pk}")
+def delete(pk: str):
+    return Product.delete(pk)
