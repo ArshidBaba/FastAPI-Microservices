@@ -1,12 +1,9 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 from redis_om import get_redis_connection, HashModel
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-app.add_middleware(
-    CORSMiddleware,
-)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],
@@ -15,9 +12,10 @@ app.add_middleware(
 )
 
 redis = get_redis_connection(
-    host="redis-13954.c301.ap-south-1-1.ec2.cloud.redislabs.com",
-    port=13954,
-    password="Owye0AY3sO3RB5g1xu1kpP8YemihvTlD",
+    host="redis-17583.c281.us-east-1-2.ec2.cloud.redislabs.com",
+    port=17583,
+    password="6MqaklaHYtFncGaKfW79Ka0z4U6G9aFM",
+    decode_responses=True,
 )
 
 
@@ -49,16 +47,3 @@ def format(pk: str):
 @app.post("/products")
 def create(product: Product):
     return product.save()
-
-
-@app.get("/products/{pk}")
-def get(pk: str):
-    return Product.get(pk)
-
-
-@app.delete("/products/{pk}")
-def delete(pk: str):
-    return Product.delete(pk)
-
-
-print("Test")
